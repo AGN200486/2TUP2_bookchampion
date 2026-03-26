@@ -1,13 +1,14 @@
 import React from "react";
 
-const BookItems = ({ title }, { author }) => {
+const BookItems = ({book}) => {
   return (
     <>
       <div>BookItems</div>
-      <p>
-        {" "}
-        Titulo del libro: {title} Autor: {author}
-      </p>
+        <h2>Title: {book.title}</h2>
+        <p>Rating: {book.rating}</p>
+        <p>Paginas: {book.pageCount}</p>
+        <img src={book.imageUrl} alt={book.title} width="200"/>
+        <p>{book.summary}</p> 
     </>
   );
 };

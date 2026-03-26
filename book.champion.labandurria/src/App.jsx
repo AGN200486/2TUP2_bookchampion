@@ -52,15 +52,16 @@ function App() {
         "En un mundo gobernado por un régimen totalitario, un hombre lucha contra la vigilancia constante y la manipulación de la verdad.",
     },
   ];
+  const libro1 = books
+    .filter(libro => libro.id == 1)
+    .map(nombre => nombre.title)
 
   return (
     <>
-      <h1>Book Champions!</h1>
-      <h3>Libros!</h3>
-      <BookItems
-        title={books.map((book) => book.title)}
-        author={books.map((book) => book.author)}
-      />
+      <h1>Biblioteca!</h1>
+      {books.map((book)=>(
+        <BookItems key={book.id} book={book} />
+      ))}
     </>
   );
 }
