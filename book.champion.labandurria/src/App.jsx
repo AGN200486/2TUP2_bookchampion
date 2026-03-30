@@ -1,8 +1,9 @@
 import "./App.css";
-import BookItems from "./components/bookitems/BookItems";
+import Books from "./components/Books";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const books = [
+  const initialBooks = [
     {
       id: 1,
       title: "Harry Potter 1",
@@ -52,16 +53,10 @@ function App() {
         "En un mundo gobernado por un régimen totalitario, un hombre lucha contra la vigilancia constante y la manipulación de la verdad.",
     },
   ];
-  const libro1 = books
-    .filter(libro => libro.id == 1)
-    .map(nombre => nombre.title)
-
   return (
     <>
-      <h1>Biblioteca!</h1>
-      {books.map((book)=>(
-        <BookItems key={book.id} book={book} />
-      ))}
+      <h1>Libros</h1>
+      <Books books={initialBooks} />
     </>
   );
 }
