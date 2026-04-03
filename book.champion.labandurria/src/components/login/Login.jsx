@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
+import { useRef } from "react";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value)
@@ -29,6 +32,7 @@ const Login = () => {
                         <Form.Control
                             type="email"
                             required
+                            ref={emailRef}
                             placeholder="Ingresar email"
                             onChange={handleEmailChange}
                             value={email} />
@@ -37,6 +41,7 @@ const Login = () => {
                         <Form.Control
                             type="password"
                             required
+                            ref={passwordRef}
                             placeholder="Ingresar contraseña"
                             onChange={handlePasswordChange}
                             value={password}
