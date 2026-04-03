@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import NewBook from './components/newBook/NewBook';
 import Books from './components/books/Books';
+import Login from './components/login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const booksInitial = [
@@ -56,7 +57,7 @@ const booksInitial = [
 ];
 
 function App() {
-  const [books, setBooks] = useState(booksInitial);
+  const [booksNew, setBooks] = useState(booksInitial);
 
   const handleBookAdded = (enteredBook) => {
     const newBook = {
@@ -70,9 +71,10 @@ function App() {
   return (
     <>
       <h1>Book Champions!</h1>
+      <Login/>
       <h3>Libros!</h3>
       <NewBook onBookAdded={handleBookAdded} />
-      <Books books={books} />
+      <Books books={booksNew} />
     </>
   );
 }
