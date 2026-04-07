@@ -1,53 +1,59 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import ConfirmModal from '../shared/ConfirmModal';
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import ConfirmDeleteModal from "../ui/ConfirmDeleteModal";
+import App from "../../App";
 
-const BookItem = ({ id, title, author, rating, pageCount, imageUrl, available, onDelete}) => {
-    const [showModal, setShowModal] = useState(false);
-    const handleOpenModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
-    
-    const [bookTitle, setBookTitle] = useState(title);
+const BookItem = ({
+  id,
+  title,
+  author,
+  rating,
+  pageCount,
+  imageUrl,
+  available,
+  onDelete,
+}) => {
+  const [showModal, setShowModal] = useState(false);
 
-    const handleConfirmDelete = () => {
-        onDelete(id); // Ejecuta la función que está en App.jsx
-        handleCloseModal();
-    };
+  const handleDeleteClick = () => {
+    setShowModal(true);
+  };
 
-    const handleClick = () => {
-        setBookTitle("Actualizado!");
-    };
+  const handleCancel = () => {
+    setShowModal(false);
+  };
 
-    return (
-        <>
-        <Card className="mx-3" style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={imageUrl} />
-            <Card.Body>
-                <Card.Title>{bookTitle}</Card.Title>
-                <Card.Subtitle>{author}</Card.Subtitle>
-                <div>
-                    <div>{rating} estrellas</div>
-                    <p>{pageCount} páginas</p>
-                    <p>{available ? "Disponible" : "Reservado"}</p>
-                </div>
-                <Button variant="dark" onClick={handleClick}>
-                    Cambiar titulo
-                </Button>
+  const handleConfirmDelete = () => {
+    setShowModal(false);
+    onDelete(id);
+  };
 
-                <Button variant="danger" onClick={handleOpenModal}>
-                    Eliminar Libro
-                </Button>
-            </Card.Body>
-        </Card>
-        <ConfirmModal 
-                show={showModal} 
-                onHide={handleCloseModal} 
-                onConfirm={handleConfirmDelete} 
-                bookTitle={title}
-        />
-        </>
-    );
+  return (
+    <>
+      <Card className="mx-3 mb-4" style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={imageUrl} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Subtitle>{author}</Card.Subtitle>
+          <div>
+            <div>{rating} estrellas</div>
+            <p>{pageCount} páginas</p>
+            <p>{available ? "Disponible" : "Reservado"}</p>
+          </div>
+          <Button variant="danger" onClick={handleDeleteClick}>
+            Eliminar
+          </Button>
+        </Card.Body>
+      </Card>
+      <ConfirmDeleteModal
+        show={showModal}
+        onCancel={handleCancel}
+        onConfirm={handleConfirmDelete}
+        bookTitle={title}
+      />
+    </>
+  );
 };
 
 export default BookItem;
