@@ -23,9 +23,17 @@ const BookItem = ({ title, author, rating, pageCount, imageUrl, available }) => 
                 <Button variant="dark" onClick={handleClick}>
                     Cambiar titulo
                 </Button>
+                <button 
+                    className="btn btn-danger btn-sm"
+                    onClick={() => onDeleteRequest(book)}
+                >
+                    Eliminar
+                </button>
             </Card.Body>
         </Card>
     );
+
+    
 };
 
 export default BookItem;

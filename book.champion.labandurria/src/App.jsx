@@ -79,5 +79,49 @@ function App() {
   );
 }
 
+import ConfirmModal from "../ui/ConfirmModal";
+
+function BookList({ books, setBooks }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const handleDeleteRequest = (book) => {
+    setSelectedBook(book);
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    const updatedBooks = books.filter(
+      (b) => b.id !== selectedBook.id
+    );
+    setBooks(updatedBooks);
+    setShowModal(false);
+    setSelectedBook(null);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
+    setSelectedBook(null);
+  };
+
+  return (
+    <>
+      {books.map((book) => (
+        <BookItem
+          key={book.id}
+          book={book}
+          onDeleteRequest={handleDeleteRequest}
+        />
+      ))}
+
+      <ConfirmModal
+        show={showModal}
+        onCancel={handleCancel}
+        onConfirm={handleConfirmDelete}
+      />
+    </>
+  );
+}
+
 export default App;
 
