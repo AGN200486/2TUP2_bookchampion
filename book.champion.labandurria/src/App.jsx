@@ -68,13 +68,17 @@ function App() {
     setBooks((prevBooks) => [newBook, ...prevBooks]);
   };
 
+  const deleteBookHandler = (id) => {
+  setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
+  };
+
   return (
     <>
       <h1>Book Champions!</h1>
       <Login/>
       <h3>Libros!</h3>
       <NewBook onBookAdded={handleBookAdded} />
-      <Books books={booksNew} />
+      <Books books={booksNew} onDeleteBook={deleteBookHandler} />
     </>
   );
 }
