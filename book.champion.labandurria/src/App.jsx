@@ -3,6 +3,7 @@ import './App.css';
 import NewBook from './components/newBook/NewBook';
 import Books from './components/books/Books';
 import Login from './components/login/Login';
+import ConfirmModal from './components/ui/ConfirmModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const booksInitial = [
@@ -79,7 +80,7 @@ function App() {
   );
 }
 
-import ConfirmModal from "../ui/ConfirmModal";
+
 
 function BookList({ books, setBooks }) {
   const [showModal, setShowModal] = useState(false);
