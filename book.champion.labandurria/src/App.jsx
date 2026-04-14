@@ -1,5 +1,7 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { useState } from "react";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import NotFound from "./components/notFound/NotFound";
@@ -11,6 +13,10 @@ function App() {
   const handleLogIn = () => {
     SetLoggedIn(true);
   };
+  const handleLogOut = () => {
+  SetLoggedIn(false);
+  };
+
   return (
     <div>
       <BrowserRouter>
@@ -18,10 +24,10 @@ function App() {
           <Route path="/" element={<Navigate to="login" />} />
           <Route path="login" element={<Login onLogin={handleLogIn} />} />
           <Route
-            path="./library"
+            path="/library"
             element={
               <Protected isSignedIn={loggedIn}>
-                <Dashboard />
+                <Dashboard onLogout={handleLogOut}/>
               </Protected>
             }
           ></Route>

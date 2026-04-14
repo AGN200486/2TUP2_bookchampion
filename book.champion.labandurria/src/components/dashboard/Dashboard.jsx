@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import NewBook from "../newBook/NewBook";
 import Books from "../books/Books";
-import App from "../../App";
+import { Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 const booksInitial = [
   {
@@ -54,7 +55,8 @@ const booksInitial = [
       "En un mundo gobernado por un régimen totalitario, un hombre lucha contra la vigilancia constante y la manipulación de la verdad.",
   },
 ];
-const Dashboard = () => {
+const Dashboard = ({ onLogout }) => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState(booksInitial);
 
   const handleBookAdded = (enteredBook) => {
@@ -70,13 +72,23 @@ const Dashboard = () => {
     setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
   };
 
+  const handleSignOut = () => {
+    onLogout(); // Cambia el estado a false en App.jsx
+    navigate("/login"); // Redirige al login
+  };
+
   return (
-    <div>
-      <h1>Book Champions!</h1>
-      <h3>Libros!</h3>
-      <NewBook onBookAdded={handleBookAdded} />
-      <Books books={books} onDelete={handleDeleteBook} />
-    </div>
+    <Container className="mt-3">
+      <div className="d-flex justify-content-end mb-4">
+        <Button variant="outline-danger" onClick={handleSignOut}>
+          Cerrar sesión
+        </Button>
+    	</div>
+    	<h1>Book Champions!</h1>
+    	<h3>Libros!</h3>
+    	<NewBook onBookAdded={handleBookAdded} />
+    	<Books books={books} onDelete={handleDeleteBook} />
+    </Container>
   );
 };
 
