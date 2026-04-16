@@ -1,5 +1,22 @@
 import express from "express";
+import { PORT } from "./config.js";
+import bookRoutes from "./routes/books.routes.js"
+import { sequelize } from "../db.js";
+
+
 const app = express();
-const port = 3000;
-app.listen(port);
-console.log("server is running on port ${PORT}");
+
+try{
+    app.use(bookRoutes);
+    app.listen(PORT);
+
+    await sequelize.authenticate();
+    console.log(`Server listening on port ${PORT}`);
+} catch (error){
+    console.log("there was an error on initializacion");
+}
+
+app.use(bookRoutes);
+
+app.listen(PORT);
+console.log(`server is running on port ${PORT}`);
