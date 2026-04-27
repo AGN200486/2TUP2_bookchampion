@@ -65,13 +65,3 @@ export const deleteBook = async (req, res) => {
     await book.destroy();
     res.send("El libro ha sido eliminado correctamente.");
 };
-
-export const deleteBook = async (req, res) => {
-    const { id } = req.params;
-    const book = await Book.findByPk(id);
-    if (!book) {
-        return res.status(404).send("Libro no encontrado.");
-    }
-    await book.destroy();
-    res.send("El libro ha sido eliminado correctamente.");
-};
